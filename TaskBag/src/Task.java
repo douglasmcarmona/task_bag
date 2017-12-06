@@ -6,19 +6,23 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 	private static final long serialVersionUID = 7294615574408072543L;
-	double x1, x2, y1, y2;	
+	double x, y;	
 	boolean isInside;
+	int id;
 	
-	public Task() {
+	public Task(int id) {
 		isInside = false;
+		this.id = id;
 	}
 	
 	public void isInsideCircle() {
-		x1 = Math.random();
-		y1 = Math.random();
-		x2 = Math.random();
-		y2 = Math.random();
-		double distance = Math.sqrt((Math.pow(((x2-x1)), 2)+Math.pow((y2-y1), 2)));
+		x = Math.random();
+		y = Math.random();
+		double distance = Math.sqrt(Math.pow(x, 2)+Math.pow(y, 2));
+		System.out.println("Coordenada sorteada: " + x + ", " + y
+				+ "\nDistancia ate a origem: " + distance);
+		
 		if(distance <= 1) isInside = true;
+		System.out.println("ponto sorteado " + (isInside ? "dentro" : "fora"));
 	}
 }

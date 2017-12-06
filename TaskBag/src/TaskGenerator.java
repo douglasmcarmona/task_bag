@@ -1,21 +1,27 @@
-import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public class TaskGenerator extends Thread {
 
-	PriorityQueue<Task> taskBag;
+	static ArrayList<Task> taskBag;
+	int taskCounter;
 	
-	public TaskGenerator(PriorityQueue<Task> tb) {
+	public TaskGenerator(ArrayList<Task> tb) {
 		taskBag = tb;
+		taskCounter = 10;
+	}
+	
+	public synchronized void generateTask() {
+		try {
+			Thread.sleep(10000);
+			taskBag.add(new Task(taskCounter++));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void run() {
 		while(true) {
-			try {
-				Thread.sleep(10000);
-				taskBag.add(new Task());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			generateTask();
 		}
 	}
 }
